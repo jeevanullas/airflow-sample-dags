@@ -32,7 +32,7 @@ args = {
 
 dag = DAG(
     dag_id='example_bash_operator', default_args=args,
-    schedule_interval='0 0 * * *',
+    schedule_interval='* * * * *',
     dagrun_timeout=timedelta(minutes=60))
 
 cmd = 'ls -l'
