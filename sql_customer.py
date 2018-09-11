@@ -21,6 +21,6 @@ dag = DAG(
 
 process_customers_order_dim = PythonOperator(
     task_id='process_customer_order',
-    op_kwargs = {'conn_id':'orders_redshift'}
+    op_kwargs = {'conn_id':'orders_redshift'},
     python_callable=process_customers_order_dim,
     dag=dag)
