@@ -1,6 +1,6 @@
+from __future__ import print_function
 import airflow
 from airflow import DAG
-from __future__ import print_function
 from acme.operators.dwh_operators import PostgresOperatorWithTemplatedParams
 from datetime import datetime, timedelta
 from airflow.models import Variable
