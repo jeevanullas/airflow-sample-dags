@@ -8,7 +8,7 @@ def process_customers_order_dim(**kwargs):
     sql = "select distinct customer.cust_name, order_info.order_id from customer, order_info where customer.customer_id=order_info.customer_id;"
 
     records = pg_hook.get_records(sql)
-    print records
+    print(records)
 
     return records
 
