@@ -13,15 +13,6 @@ args = {
 
 tmpl_search_path = Variable.get("sql_path")
 
-process_order_fact = PostgresOperatorWithTemplatedParams(
-    task_id='process_order_fact',
-    postgres_conn_id='orders_redshift',
-    sql='query.sql',
-    parameters={"cust_id": "CUST-001"},
-    dag=dag,
-    pool='redshift_dwh')
-
-
 dag = airflow.DAG(
     'process_order_fact',
     schedule_interval="* * * * *",
@@ -29,3 +20,11 @@ dag = airflow.DAG(
     template_searchpath=tmpl_search_path,
     default_args=args,
     max_active_runs=1)
+
+process_order_fact = PostgresOperatorWithTemplatedParams(
+    task_id='process_order_fact',
+    postgres_conn_id='orders_redshift',
+    sql='query.sql',
+    parameters={"cust_id": "CUST-001"},
+    dag=dag,
+    pool='redshift_dwh')
