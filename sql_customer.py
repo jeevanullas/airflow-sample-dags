@@ -3,6 +3,11 @@ from datetime import datetime, timedelta
 from airflow.operators.python_operator import PythonOperator
 from airflow.hooks import PostgresHook
 
+args = {
+    'owner': 'airflow',
+    'depends_on_past': False
+}
+
 def process_customers_order_dim(**kwargs):
     conn_id = kwargs.get('conn_id')
     pg_hook = PostgresHook(conn_id)
