@@ -1,4 +1,5 @@
 from airflow import DAG
+import airflow
 from datetime import datetime, timedelta
 from airflow.operators.python_operator import PythonOperator
 from airflow.hooks import PostgresHook
