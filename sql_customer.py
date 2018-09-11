@@ -5,7 +5,8 @@ from airflow.hooks import PostgresHook
 
 args = {
     'owner': 'airflow',
-    'depends_on_past': False
+    'depends_on_past': False,
+    'start_date': airflow.utils.dates.days_ago(2)
 }
 
 def process_customers_order_dim(**kwargs):
@@ -20,7 +21,7 @@ def process_customers_order_dim(**kwargs):
 
 dag = DAG(
     'process_dimensions',
-    schedule_interval="@daily",
+    schedule_interval="* * * * *",
     dagrun_timeout=timedelta(minutes=60),
     default_args=args,
     max_active_runs=1)
