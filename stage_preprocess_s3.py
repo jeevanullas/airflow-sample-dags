@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 from airflow.models import Variable
 from airflow.operators.redshift_to_s3_operator import RedshiftToS3Transfer
 from airflow.contrib.hooks.ssh_hook import SSHHook
-from airflow.contrib.operators.ssh_operator import SSHExecuteOperator
+from airflow.contrib.operators.ssh_operator import SSHOperator 
 
 args = {
     'owner': 'airflow',
@@ -46,10 +46,11 @@ extract_product_stg = RedshiftToS3Transfer(
 ssh01 = SSHHook(conn_id='ssh_default')
 
 # SSH connect
-execute_remote_ec2 = SSHExecuteOperator(
+execute_remote_ec2 = SSHOperator(
     task_id='run_boto_script_on_ec2',
     ssh_hook=ssh01,
-    bash_command='/home/ec2-user/script.py',
+    ssh_conn_id='ssh_default',
+    command='python /home/ec2-user/script.py',
     dag=dag)
 
 process_product_stg >> extract_product_stg >> execute_remote_ec2
