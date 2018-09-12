@@ -4,7 +4,7 @@ from airflow import DAG
 from acme.operators.dwh_operators import PostgresOperatorWithTemplatedParams
 from datetime import datetime, timedelta
 from airflow.models import Variable
-from airflow.operators import RedshiftToS3Transfer
+from airflow.operators.redshift_to_s3_operator import RedshiftToS3Transfer
 
 args = {
     'owner': 'airflow',
