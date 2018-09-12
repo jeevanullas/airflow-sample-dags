@@ -41,6 +41,7 @@ extract_product_stg = RedshiftToS3Transfer(
     redshift_conn_id='orders_redshift',
     aws_conn_id='aws_conn_id',
     dag=dag,
+    parameters='ALLOWOVERWRITE',
     include_header=True)
 
 ssh01 = SSHHook(ssh_conn_id='ssh_default')
