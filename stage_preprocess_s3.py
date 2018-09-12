@@ -43,7 +43,7 @@ extract_product_stg = RedshiftToS3Transfer(
     dag=dag,
     include_header=False)
 
-ssh01 = SSHHook(conn_id='ssh_default')
+ssh01 = SSHHook(ssh_conn_id='ssh_default')
 
 # SSH connect
 execute_remote_ec2 = SSHOperator(
