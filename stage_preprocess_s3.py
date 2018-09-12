@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 from airflow.models import Variable
 from airflow.operators.redshift_to_s3_operator import RedshiftToS3Transfer
 from airflow.contrib.hooks.ssh_hook import SSHHook
-from airflow.contrib.operators.ssh_execute_operator import SSHExecuteOperator
+from airflow.contrib.operators.ssh_operator import SSHExecuteOperator
 
 args = {
     'owner': 'airflow',
