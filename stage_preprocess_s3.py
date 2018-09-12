@@ -38,6 +38,7 @@ extract_product_stg = RedshiftToS3Transfer(
     s3_key='product',
     redshift_conn_id='orders_redshift',
     aws_conn_id='aws_conn_id',
+    dag=dag,
     include_header=True)
 
 process_product_stg >> extract_product_stg
