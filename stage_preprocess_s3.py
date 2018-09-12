@@ -44,6 +44,13 @@ extract_product_stg = RedshiftToS3Transfer(
     unload_options=["ALLOWOVERWRITE"],
     include_header=True)
 
+delete_product_stg = PostgresOperatorWithTemplatedParams(
+    task_id='delete_product_stg',
+    postgres_conn_id='orders_redshift',
+    sql='delete_product_stg.sql',
+    dag=dag,
+    pool='redshift_dwh')
+
 ssh01 = SSHHook(ssh_conn_id='ssh_default')
 
 # SSH connect
@@ -54,4 +61,4 @@ execute_remote_ec2 = SSHOperator(
     command='python /home/ec2-user/script.py',
     dag=dag)
 
-process_product_stg >> extract_product_stg >> execute_remote_ec2
+process_product_stg >> extract_product_stg >> delete_product_stg >> execute_remote_ec2
