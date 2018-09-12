@@ -32,7 +32,7 @@ process_product_stg = PostgresOperatorWithTemplatedParams(
 
 extract_product_stg = RedshiftToS3Transfer(
     task_id='extract_product_stg_s3',
-    schema='orders',
+    schema='public',
     table='staging_product',
     s3_bucket='bigdataset-airflow',
     s3_key='product',
