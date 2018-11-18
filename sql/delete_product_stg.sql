@@ -1,1 +1,0 @@
-TRUNCATE staging_product; 
